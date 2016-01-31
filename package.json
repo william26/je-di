@@ -8,8 +8,8 @@
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- src/**/* --recursive",
     "test": "mocha --compilers js:babel-register src/**/*",
     "test-watch": "mocha --watch --compilers js:babel-register src/**/*",
-    "build": "npm run clean && babel -d build 'src/**/!(*.spec)+(.js)'",
-    "watch": "npm run clean && babel --watch -d build src/**/!(*.spec)+(.js)'",
+    "build": "npm run clean && cd src && babel -d ../build '**/!(*.spec)+(.js)'",
+    "watch": "npm run clean && cd src && babel --watch -d ../build '**/!(*.spec)+(.js)'",
     "clean": "rm -rf build"
   },
   "author": "Antoine Jackson",
