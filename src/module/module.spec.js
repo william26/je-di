@@ -6,7 +6,7 @@ const di = require('../index');
 describe('jedi.module() method', function () {
   it('should return an object containing .injectables, .factories and .services', function () {
     // When
-    const module = di.module('foo', []);
+    const module = di.module([]);
 
     // Then
     expect(module.injectables).to.deep.equal({});
@@ -16,7 +16,7 @@ describe('jedi.module() method', function () {
 
   it('should return an object containing .register() method', function () {
     // When
-    const module = di.module('foo', []);
+    const module = di.module([]);
 
     // Then
     expect(module.register).to.be.a('function');
@@ -24,7 +24,7 @@ describe('jedi.module() method', function () {
 
   it('should return an object containing .factory() method', function () {
     // When
-    const module = di.module('foo', []);
+    const module = di.module([]);
 
     // Then
     expect(module.factory).to.be.a('function');
@@ -32,9 +32,17 @@ describe('jedi.module() method', function () {
 
   it('should return an object containing .service() method', function () {
     // When
-    const module = di.module('foo', []);
+    const module = di.module([]);
 
     // Then
     expect(module.service).to.be.a('function');
+  });
+
+  it('should contain a dependencies array if given', function () {
+    // When
+    const module = di.module(['foo']);
+
+    // Then
+    expect(module.dependencies).to.deep.equal(['foo']);
   });
 });

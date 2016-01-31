@@ -1,7 +1,9 @@
 'use strict';
 
-module.exports = function createModule(name, dependencies) {
+module.exports = function createModule(dependencies) {
   var module = {};
+
+  module.dependencies = dependencies;
 
   module.injectables = {};
   module.factories = {};

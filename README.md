@@ -6,7 +6,7 @@ This is yet another dependency injection module, based on ideas of Angular di.
 Usage
 ----
 
-```
+```javascript
 const jedi = require('jedi');
 
 module.exports = jedi
@@ -38,13 +38,23 @@ The code above will result in the following console statement:
 Hello world !
 ```
 
-Next steps
-------
+Module dependency
+------------
 
-I plan to add in the near future:
+You can include all of a module's injectables into another module by giving a module array in `.module()` :
 
-- Module dependency, allowing the current module to use all the other modules' injections.
+```
+const module1 = jedi
+  .module()
+  .register('foo', 'bla');
 
+
+const module2 = jedi
+  .module([module1])
+  .run(function (foo) {
+    // here foo === 'bla'
+  });
+```
 
 Contributing:
 -----

@@ -33,4 +33,14 @@ describe('module.run() method', function () {
     // Then
     expect(result).to.deep.equal(['bar', 'barworld', 'barworldbazz']);
   });
+
+  it('should return the module', function () {
+    // When
+    const result = run(this.module, function () {
+
+    });
+
+    // Then
+    expect(result).to.equal(this.module);
+  });
 });
