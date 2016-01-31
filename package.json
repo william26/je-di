@@ -1,0 +1,33 @@
+{
+  "name": "je-di",
+  "version": "0.0.1",
+  "description": "Just Enough dependency injection",
+  "repository": "https://github.com/william26/je-di.git",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- src/**/* --recursive",
+    "test": "mocha --compilers js:babel-register src/**/*",
+    "test-watch": "mocha --watch --compilers js:babel-register src/**/*",
+    "build": "npm run clean && babel -d build 'src/**/!(*.spec)+(.js)'",
+    "watch": "npm run clean && babel --watch -d build src/**/!(*.spec)+(.js)'",
+    "clean": "rm -rf build"
+  },
+  "author": "Antoine Jackson",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "chai": "^3.5.0",
+    "isparta": "^4.0.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
+  },
+  "dependencies": {
+    "args-list": "^0.3.3"
+  }
+}
