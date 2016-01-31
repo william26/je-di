@@ -1,6 +1,8 @@
 Just Enough Dependency Injection
 ====================
 
+![Travis CI](https://travis-ci.org/william26/je-di.svg?branch=master)
+
 This is yet another dependency injection module, based on ideas of Angular di.
 
 Usage
