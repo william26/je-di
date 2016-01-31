@@ -10,14 +10,15 @@ describe('module.factory() method', function () {
       services: {}
     };
     const factory = require('./factory')(mod);
+    const callable = function () {
+      return 'baz';
+    };
 
     // When
-    factory('foo', function () {
-      return 'baz';
-    });
+    factory('foo', callable);
 
     // Then
-    expect(mod.factories['foo']).to.equal('baz');
+    expect(mod.factories['foo']).to.equal(callable);
   });
 
   it('should throw an exception if the name is already in the module', function () {

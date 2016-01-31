@@ -4,7 +4,7 @@ module.exports = function (module) {
       throw new Error(`Cannot register as '${name}', already registered`);
     }
 
-    module.factories[name] = factory();
+    module.factories[name] = factory;
 
     return module;
   };
