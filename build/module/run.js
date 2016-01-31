@@ -12,4 +12,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 module.exports = function run(module, fn) {
   fn.apply(module, (0, _resolve2.default)(module, (0, _argsList2.default)(fn)));
+  return module;
 };
