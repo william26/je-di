@@ -1,4 +1,5 @@
-import argsList from 'args-list';
+// import argsList from 'args-list';
+const argsList = require('args-list');
 
 
 function resolveName(module, name) {

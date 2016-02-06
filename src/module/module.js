@@ -7,6 +7,8 @@ module.exports = function createModule(dependencies) {
   module.factories = {};
   module.services = {};
 
+  module.runnableMethod = null;
+
   module.register = require('./register')(module);
   module.factory = require('./factory')(module);
   module.service = require('./service')(module);
