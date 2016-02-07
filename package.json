@@ -8,7 +8,7 @@
     "coverage": "NODE_ENV=\"test\" mocha -r adana-dump --compilers js:babel-core/register src/tests/**/*.spec.js",
     "lcov": "npm run coverage && cat ./coverage/coverage.json | ./node_modules/.bin/adana --format lcov > coverage/lcov.info",
     "test": "mocha --compilers js:babel-register src/**/*",
-    "test-watch": "mocha --watch --compilers js:babel-register src/**/*",
+    "test-watch": "mocha --watch --compilers js:babel-register tests/**/* src/**/*",
     "build": "npm run clean && cd src && babel -d ../build '**/!(*.spec)+(.js)'",
     "watch": "npm run clean && cd src && babel --watch -d ../build '**/!(*.spec)+(.js)'",
     "clean": "rm -rf build"

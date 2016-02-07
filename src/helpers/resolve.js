@@ -10,14 +10,14 @@ function resolveName(module, name) {
 
   const fromFactory = module.factories[name];
   if (fromFactory) {
-    const result = fromFactory(...resolve(module, argsList(fromFactory)));
+    const result = fromFactory(...module.resolve(argsList(fromFactory)));
     module.injectables[name] = result;
     return result;
   }
 
   const fromServices = module.services[name];
   if (fromServices) {
-    const result = new fromServices(...resolve(module, argsList(fromServices)));
+    const result = new fromServices(...module.resolve(argsList(fromServices)));
     module.injectables[name] = result;
     return result;
   }
@@ -25,7 +25,7 @@ function resolveName(module, name) {
   if (module.dependencies) {
     const result = module.dependencies.reduce(function (injectable, depModule) {
       try {
-        return injectable || resolveName(depModule, name);
+        return injectable || depModule.get(name);
       } catch (err) {
         return injectable;
       }

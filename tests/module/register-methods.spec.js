@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 
-import jedi from '../../index';
+import jedi from '../../src';
 
-describe('A module', function () {
+describe('Injectable registration', function () {
   let module;
   beforeEach(function () {
     module = jedi.module();
@@ -42,7 +42,7 @@ describe('A module', function () {
     });
   };
 
-  describe('.register() method', function () {
+  describe('a module .register() method', function () {
     it('should register a given direct value in the module\'s injectables', function () {
       // Given
       const registerable = 'foo';
@@ -58,7 +58,7 @@ describe('A module', function () {
     itShouldReturnTheModule('register');
   });
 
-  describe('.service() method', function () {
+  describe('a module .service() method', function () {
     it('should register a given function in the module\'s services', function () {
       // Given
       const registerable = 'foo';
@@ -75,7 +75,7 @@ describe('A module', function () {
   });
 
 
-  describe('.factory() method', function () {
+  describe('a module .factory() method', function () {
     it('should register a given function in the module\'s factories', function () {
       // Given
       const registerable = 'foo';

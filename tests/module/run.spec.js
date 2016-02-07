@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 
-import jedi from '../../index';
+import jedi from '../../src';
 
-describe('A module', function () {
-  describe('.run() method', function () {
+describe('Module runnable registration', function () {
+  describe('a module .run() method', function () {
     let jediModule;
     beforeEach(function () {
       jediModule = jedi.module();
