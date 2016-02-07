@@ -22,7 +22,7 @@ function resolveName(module, name) {
     return result;
   }
 
-  if (module.dependencies) {
+  if (module.dependencies[0]) {
     const result = module.dependencies.reduce(function (injectable, depModule) {
       try {
         return injectable || depModule.get(name);

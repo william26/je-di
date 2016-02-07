@@ -25,5 +25,17 @@ describe('Injection resolver', function () {
         bla: 'barquxblu'
       }]);
     });
-  })
+
+    it('should throw an error when the module is not found', function () {
+      const jediModule = jedi.module();
+
+      // When
+      function thrower() {
+        const result = jediModule.resolve(['foo']);
+      }
+
+      // Then
+      expect(thrower).to.throw(/Impossible to find module 'foo'/);
+    });
+  });
 });

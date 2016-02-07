@@ -5,13 +5,18 @@
   "repository": "https://github.com/william26/je-di.git",
   "main": "index.js",
   "scripts": {
-    "coverage": "NODE_ENV=\"test\" mocha -r adana-dump --compilers js:babel-core/register src/tests/**/*.spec.js",
+    "coverage": "NODE_ENV=\"test\" mocha -r adana-dump --compilers js:babel-core/register tests/**/*.spec.js src/**/*",
     "lcov": "npm run coverage && cat ./coverage/coverage.json | ./node_modules/.bin/adana --format lcov > coverage/lcov.info",
-    "test": "mocha --compilers js:babel-register src/**/*",
+    "test": "mocha --compilers js:babel-register tests/**/* src/**/*",
     "test-watch": "mocha --watch --compilers js:babel-register tests/**/* src/**/*",
-    "build": "npm run clean && cd src && babel -d ../build '**/!(*.spec)+(.js)'",
-    "watch": "npm run clean && cd src && babel --watch -d ../build '**/!(*.spec)+(.js)'",
-    "clean": "rm -rf build"
+
+    "clean-build": "rm -rf build",
+    "clean-coverage": "rm -rf coverage",
+    "clean-deps": "rm -rf node_modules",
+    "clean": "npm run clean-build && npm run clean-coverage && npm run clean-deps",
+
+    "build": "npm run clean-build && cd src && babel -d ../build '**/*.js'",
+    "watch": "npm run clean-build && cd src && babel --watch -d ../build '**/*.js'"
   },
   "author": "Antoine Jackson",
   "license": "MIT",
