@@ -1,7 +1,5 @@
-import resolve from './resolve';
-
 module.exports = function get(module, name) {
-  const resolvedArray = resolve(module, [name]);
+  const resolvedArray = module.resolve([name]);
 
   if (!resolvedArray[0]) {
     throw new Error(`Impossible to inject not found module ${name}`);
