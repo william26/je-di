@@ -1,6 +1,6 @@
 {
   "name": "je-di",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Just Enough dependency injection",
   "repository": "https://github.com/william26/je-di.git",
   "main": "index.js",
@@ -9,12 +9,10 @@
     "lcov": "npm run coverage && cat ./coverage/coverage.json | ./node_modules/.bin/adana --format lcov > coverage/lcov.info",
     "test": "mocha --compilers js:babel-register tests/**/* src/**/*",
     "test-watch": "mocha --watch --compilers js:babel-register tests/**/* src/**/*",
-
     "clean-build": "rm -rf build",
     "clean-coverage": "rm -rf coverage",
     "clean-deps": "rm -rf node_modules",
     "clean": "npm run clean-build && npm run clean-coverage && npm run clean-deps",
-
     "build": "npm run clean-build && cd src && babel -d ../build '**/*.js'",
     "watch": "npm run clean-build && cd src && babel --watch -d ../build '**/*.js'"
   },
