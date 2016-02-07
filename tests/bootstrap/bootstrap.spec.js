@@ -24,6 +24,16 @@ describe('Module bootstraping', function () {
       expect(jediModule.runnableMethod.called).to.be.true;
     });
 
+    it('should do nothing if the runnable is not set', function () {
+      // When
+      function shouldNotThrow() {
+        jedi.bootstrap(jediModule);
+      }
+
+      // Then
+      expect(shouldNotThrow).not.to.throw();
+    });
+
     it('should inject a module\'s injectables in the runnable using the module\'s resolve method', function () {
       // Given
       const stubCaller = stub();
