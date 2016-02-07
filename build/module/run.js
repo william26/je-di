@@ -11,6 +11,8 @@ var _argsList2 = _interopRequireDefault(_argsList);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = function run(module, fn) {
-  fn.apply(module, (0, _resolve2.default)(module, (0, _argsList2.default)(fn)));
+  // fn.apply(module, resolve(module, argsList(fn)));
+  // return module;
+  module.runnableMethod = fn;
   return module;
 };

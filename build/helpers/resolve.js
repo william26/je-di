@@ -1,12 +1,9 @@
 'use strict';
 
-var _argsList = require('args-list');
-
-var _argsList2 = _interopRequireDefault(_argsList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+// import argsList from 'args-list';
+var argsList = require('args-list');
 
 function resolveName(module, name) {
   var fromInjectable = module.injectables[name];
@@ -16,22 +13,22 @@ function resolveName(module, name) {
 
   var fromFactory = module.factories[name];
   if (fromFactory) {
-    var result = fromFactory.apply(undefined, _toConsumableArray(resolve(module, (0, _argsList2.default)(fromFactory))));
+    var result = fromFactory.apply(undefined, _toConsumableArray(module.resolve(argsList(fromFactory))));
     module.injectables[name] = result;
     return result;
   }
 
   var fromServices = module.services[name];
   if (fromServices) {
-    var result = new (Function.prototype.bind.apply(fromServices, [null].concat(_toConsumableArray(resolve(module, (0, _argsList2.default)(fromServices))))))();
+    var result = new (Function.prototype.bind.apply(fromServices, [null].concat(_toConsumableArray(module.resolve(argsList(fromServices))))))();
     module.injectables[name] = result;
     return result;
   }
 
-  if (module.dependencies) {
+  if (module.dependencies[0]) {
     var result = module.dependencies.reduce(function (injectable, depModule) {
       try {
-        return injectable || resolveName(depModule, name);
+        return injectable || depModule.get(name);
       } catch (err) {
         return injectable;
       }

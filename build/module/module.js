@@ -3,11 +3,13 @@
 module.exports = function createModule(dependencies) {
   var module = {};
 
-  module.dependencies = dependencies;
+  module.dependencies = dependencies || [];
 
   module.injectables = {};
   module.factories = {};
   module.services = {};
+
+  module.runnableMethod = null;
 
   module.register = require('./register')(module);
   module.factory = require('./factory')(module);
