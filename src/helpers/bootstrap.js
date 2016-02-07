@@ -3,6 +3,10 @@ const argsList = require('args-list');
 const resolve = require('./resolve');
 
 
-module.exports = function (module) {
+function bootstrap(module) {
+  module.dependencies.map(bootstrap);
+
   module.runnableMethod.apply(module, module.resolve(argsList(module.runnableMethod)));
 };
+
+module.exports = bootstrap;

@@ -15,6 +15,14 @@ describe('Module dependencies', function () {
       // Then
       expect(module2.dependencies).to.include(module1);
     });
+
+    it('should set its dependencies to an empty array if none are given', function () {
+      // When
+      const module1 = jedi.module();;
+
+      // Then
+      expect(module1.dependencies).to.deep.equal([]);
+    });
   });
 
   describe('a module .resolve() method', function () {

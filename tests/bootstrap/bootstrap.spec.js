@@ -1,5 +1,5 @@
 import chai, {expect} from 'chai';
-import {spy, stub} from 'sinon';
+import sinon, {spy, stub} from 'sinon';
 import sinonChai from 'sinon-chai';
 
 chai.use(sinonChai);
@@ -37,6 +37,24 @@ describe('Module bootstraping', function () {
 
       // Then
       expect(stubCaller).to.have.been.calledWith('yo', 'bla', 'quz');
+    });
+
+    it('should run a module\'s dependencies\' runnables in ordre before its own runnable', function () {
+      // Given
+      const runnable1 = stub();
+      const module1 = jedi.module().run(runnable1);
+
+      const runnable2 = stub();
+      const module2 = jedi.module().run(runnable2);
+
+      const finalRunnable = stub();
+      const finalModule = jedi.module([module1, module2]).run(finalRunnable);
+
+      // When
+      jedi.bootstrap(finalModule);
+
+      // Then
+      sinon.assert.callOrder(runnable1, runnable2, finalRunnable);
     });
   });
 });

@@ -1,7 +1,7 @@
 module.exports = function createModule(dependencies) {
   const module = {};
 
-  module.dependencies = dependencies;
+  module.dependencies = dependencies || [];
 
   module.injectables = {};
   module.factories = {};
