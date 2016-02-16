@@ -1,13 +1,11 @@
 "use strict";
 
-module.exports = function (module) {
-  return function createService(name, service) {
-    if (module.injectables[name] || module.factories[name] || module.services[name]) {
-      throw new Error("Cannot register as '" + name + "', already registered");
-    }
+module.exports = function createService(name, service) {
+  if (this.injectables[name] || this.factories[name] || this.services[name]) {
+    throw new Error("Cannot register as '" + name + "', already registered");
+  }
 
-    module.services[name] = service;
+  this.services[name] = service;
 
-    return module;
-  };
+  return this;
 };
