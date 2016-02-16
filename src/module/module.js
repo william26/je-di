@@ -1,3 +1,10 @@
+import resolve from './resolve';
+import get from './get';
+import register from './register';
+import factory from './factory';
+import service from './service';
+import run from './run';
+
 module.exports = function createModule(dependencies) {
   const module = {};
 
@@ -9,13 +16,13 @@ module.exports = function createModule(dependencies) {
 
   module.runnableMethod = null;
 
-  module.register = require('./register')(module);
-  module.factory = require('./factory')(module);
-  module.service = require('./service')(module);
-  module.run = require('./run').bind(module, module);
+  module.register = register.bind(module);
+  module.factory = factory.bind(module);
+  module.service = service.bind(module);
+  module.run = run.bind(module);
 
-  module.resolve = require('../helpers/resolve').bind(module, module);
-  module.get = require('../helpers/get').bind(module, module);
+  module.resolve = resolve.bind(module);
+  module.get = get.bind(module);
 
   return module;
 }

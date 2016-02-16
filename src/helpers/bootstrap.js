@@ -1,8 +1,5 @@
 const argsList = require('args-list');
 
-const resolve = require('./resolve');
-
-
 function bootstrap(module) {
   module.dependencies.map(bootstrap);
   if (module.runnableMethod) {

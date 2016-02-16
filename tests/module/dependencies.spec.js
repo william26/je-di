@@ -53,7 +53,7 @@ describe('Module dependencies', function () {
     it('should add injectables resolved from a dependency to the module\'s own injectables', function () {
       const module1 = jedi.module();
 
-      module1.resolve = stub().withArgs(['foo']).returns(['bar']);
+      module1.get = stub().withArgs('foo').returns('bar');
 
       const module2 = jedi.module([module1]);
 

@@ -4,7 +4,7 @@ import jedi from '../../src';
 
 
 describe('Injection resolver', function () {
-  describe('a module .resolve() method', function () {
+  describe('a module .get() method', function () {
     it('should return an array of injected injectables given their names', function () {
       // Given
       const jediModule = jedi
@@ -18,12 +18,12 @@ describe('Injection resolver', function () {
         });
 
       // When
-      const result = jediModule.resolve(['quz']);
+      const result = jediModule.get('quz');
 
       // Then
-      expect(result).to.deep.equal([{
+      expect(result).to.deep.equal({
         bla: 'barquxblu'
-      }]);
+      });
     });
 
     it('should throw an error when the module is not found', function () {
@@ -31,7 +31,7 @@ describe('Injection resolver', function () {
 
       // When
       function thrower() {
-        const result = jediModule.resolve(['foo']);
+        const result = jediModule.get('foo');
       }
 
       // Then

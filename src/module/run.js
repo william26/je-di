@@ -1,9 +1,6 @@
-import resolve from '../helpers/resolve';
 import argsList from 'args-list';
 
-module.exports = function run(module, fn) {
-  // fn.apply(module, resolve(module, argsList(fn)));
-  // return module;
-  module.runnableMethod = fn;
-  return module;
+module.exports = function run(fn) {
+  this.runnableMethod = fn;
+  return this;
 };
