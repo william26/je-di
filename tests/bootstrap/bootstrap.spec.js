@@ -24,6 +24,21 @@ describe('Module bootstraping', function () {
       expect(jediModule.runnableMethod.called).to.be.true;
     });
 
+    it('should be able to take an ng-annotate style dependency array as runnable', function () {
+      // Given
+      const actualMethod = stub();
+      stub(jediModule, 'get')
+        .withArgs('dep1').returns('dep1value')
+        .withArgs('dep2').returns('dep2value');
+      jediModule.runnableMethod = ['dep1', 'dep2', actualMethod];
+
+      // When
+      jedi.bootstrap(jediModule);
+
+      // Then
+      expect(actualMethod.calledWith('dep1value', 'dep2value')).to.equal(true);
+    });
+
     it('should do nothing if the runnable is not set', function () {
       // When
       function shouldNotThrow() {

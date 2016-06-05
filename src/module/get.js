@@ -1,7 +1,6 @@
-import argsList from 'args-list';
+import {getArgsList, getMethod} from '../helpers/args-list';
 
 export default function resolveName(name) {
-
   const fromInjectable = this.injectables[name]
   if (fromInjectable) {
     return fromInjectable;
@@ -9,14 +8,14 @@ export default function resolveName(name) {
 
   const fromFactory = this.factories[name];
   if (fromFactory) {
-    const result = fromFactory(...argsList(fromFactory).map(::this.get));
+    const result = getMethod(fromFactory)(...getArgsList(fromFactory).map(::this.get));
     this.injectables[name] = result;
     return result;
   }
 
   const fromServices = this.services[name];
   if (fromServices) {
-    const result = new fromServices(...argsList(fromServices).map(::this.get));
+    const result = new (getMethod(fromServices))(...getArgsList(fromServices).map(::this.get));
     this.injectables[name] = result;
     return result;
   }
