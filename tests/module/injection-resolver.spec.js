@@ -26,6 +26,27 @@ describe('Injection resolver', function () {
       });
     });
 
+    it('should be able to support ng-annotate style injections', function () {
+      // Given
+      const jediModule = jedi
+        .module()
+        .register('foo', 'bar')
+        .factory('baz', ['foo', function (foo) {
+          return `${foo}qux`;
+        }])
+        .service('quz', ['baz', function (baz) {
+          this.bla = `${baz}blu`;
+        }]);
+
+      // When
+      const result = jediModule.get('quz');
+
+      // Then
+      expect(result).to.deep.equal({
+        bla: 'barquxblu'
+      });
+    });
+
     it('should throw an error when the module is not found', function () {
       const jediModule = jedi.module();
 

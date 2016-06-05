@@ -7,6 +7,8 @@
   "scripts": {
     "coverage": "NODE_ENV=\"test\" mocha -r adana-dump --compilers js:babel-core/register tests/**/*.spec.js src/**/*",
     "lcov": "npm run coverage && cat ./coverage/coverage.json | ./node_modules/.bin/adana --format lcov > coverage/lcov.info",
+    "htmlcov": "npm run coverage && cat ./coverage/coverage.json | ./node_modules/.bin/adana --format html > coverage/coverage.html",
+    "ocov": "open coverage/coverage.html",
     "test": "mocha --compilers js:babel-register tests/**/* src/**/*",
     "test-watch": "mocha --watch --compilers js:babel-register tests/**/* src/**/*",
     "clean-build": "rm -rf build",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "adana-cli": "^0.1.1",
     "adana-dump": "^0.1.0",
+    "adana-format-html": "0.0.5",
     "adana-format-json": "^0.1.0",
     "adana-format-lcov": "^0.1.1",
     "adana-format-pretty": "^0.1.0",
