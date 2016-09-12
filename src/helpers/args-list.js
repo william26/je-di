@@ -1,4 +1,4 @@
-import argsList from 'args-list';
+import argsList from 'function-arguments';
 
 export function getArgsList(target) {
   if (typeof target === 'object' && target.length && typeof target[target.length - 1] === 'function') {

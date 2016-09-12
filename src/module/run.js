@@ -1,4 +1,4 @@
-import argsList from 'args-list';
+import argsList from 'function-arguments';
 
 module.exports = function run(fn) {
   this.runnableMethod = fn;

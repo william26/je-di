@@ -9,9 +9,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.getArgsList = getArgsList;
 exports.getMethod = getMethod;
 
-var _argsList = require('args-list');
+var _functionArguments = require('function-arguments');
 
-var _argsList2 = _interopRequireDefault(_argsList);
+var _functionArguments2 = _interopRequireDefault(_functionArguments);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,7 +20,7 @@ function getArgsList(target) {
     return target.slice(0, target.length - 1);
   }
   if (typeof target === 'function') {
-    return (0, _argsList2.default)(target);
+    return (0, _functionArguments2.default)(target);
   }
 }
 

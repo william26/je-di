@@ -43,6 +43,7 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "args-list": "^0.3.3"
+    "args-list": "^0.3.3",
+    "function-arguments": "^1.0.4"
   }
 }

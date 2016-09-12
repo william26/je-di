@@ -1,7 +1,10 @@
 'use strict';
 
-const jedi = {};
-jedi.module = require('./module/module');
-jedi.bootstrap = require('./helpers/bootstrap');
+import moduleCreator, {modules} from './module/module';
+import bootstrap from './helpers/bootstrap';
 
-module.exports = jedi;
+module.exports = {
+  module: moduleCreator,
+  modules,
+  bootstrap
+};

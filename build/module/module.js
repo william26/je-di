@@ -1,5 +1,11 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.modules = undefined;
+exports.default = createModule;
+
 var _resolve = require('./resolve');
 
 var _resolve2 = _interopRequireDefault(_resolve);
@@ -26,10 +32,15 @@ var _run2 = _interopRequireDefault(_run);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = function createModule(dependencies) {
+var modules = exports.modules = {};
+
+function createModule(name, dependencies) {
   var module = {};
 
-  module.dependencies = dependencies || [];
+  module.name = name;
+  module.dependencies = dependencies && dependencies.map(function (d) {
+    return typeof d === 'string' ? d : d.name;
+  }) || [];
 
   module.injectables = {};
   module.factories = {};
@@ -45,5 +56,7 @@ module.exports = function createModule(dependencies) {
   module.resolve = _resolve2.default.bind(module);
   module.get = _get2.default.bind(module);
 
+  modules[name] = module;
+
   return module;
-};
+}

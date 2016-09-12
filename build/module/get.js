@@ -7,6 +7,8 @@ exports.default = resolveName;
 
 var _argsList = require('../helpers/args-list');
 
+var _module = require('./module');
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function resolveName(name) {
@@ -30,9 +32,9 @@ function resolveName(name) {
   }
 
   if (this.dependencies[0]) {
-    var _result2 = this.dependencies.reduce(function (injectable, depModule) {
+    var _result2 = this.dependencies.reduce(function (injectable, depModuleName) {
       try {
-        return injectable || depModule.get(name);
+        return injectable || _module.modules[depModuleName].get(name);
       } catch (err) {
         return injectable;
       }
