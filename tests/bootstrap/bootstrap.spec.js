@@ -9,7 +9,7 @@ import jedi from '../../src';
 describe('Module bootstraping', function () {
   let jediModule;
   beforeEach(function () {
-    jediModule = jedi.module();
+    jediModule = jedi.module('somemodule', []);
   });
 
   describe('jedi.bootstrap() method', function () {
@@ -19,6 +19,17 @@ describe('Module bootstraping', function () {
 
       // When
       jedi.bootstrap(jediModule);
+
+      // Then
+      expect(jediModule.runnableMethod.called).to.be.true;
+    });
+
+    it('should accept a module string name as argument', function () {
+      // Given
+      jediModule.runnableMethod = stub();
+
+      // When
+      jedi.bootstrap('somemodule');
 
       // Then
       expect(jediModule.runnableMethod.called).to.be.true;
@@ -67,13 +78,13 @@ describe('Module bootstraping', function () {
     it('should run a module\'s dependencies\' runnables in ordre before its own runnable', function () {
       // Given
       const runnable1 = stub();
-      const module1 = jedi.module().run(runnable1);
+      const module1 = jedi.module('module1', []).run(runnable1);
 
       const runnable2 = stub();
-      const module2 = jedi.module().run(runnable2);
+      const module2 = jedi.module('module2', []).run(runnable2);
 
       const finalRunnable = stub();
-      const finalModule = jedi.module([module1, module2]).run(finalRunnable);
+      const finalModule = jedi.module('module3', [module1, module2]).run(finalRunnable);
 
       // When
       jedi.bootstrap(finalModule);

@@ -1,4 +1,5 @@
 import {getArgsList, getMethod} from '../helpers/args-list';
+import {modules} from './module';
 
 export default function resolveName(name) {
   const fromInjectable = this.injectables[name]
@@ -21,9 +22,9 @@ export default function resolveName(name) {
   }
 
   if (this.dependencies[0]) {
-    const result = this.dependencies.reduce(function (injectable, depModule) {
+    const result = this.dependencies.reduce(function (injectable, depModuleName) {
       try {
-        return injectable || depModule.get(name);
+        return injectable || modules[depModuleName].get(name);
       } catch (err) {
         return injectable;
       }

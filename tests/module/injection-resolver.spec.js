@@ -8,7 +8,7 @@ describe('Injection resolver', function () {
     it('should return an array of injected injectables given their names', function () {
       // Given
       const jediModule = jedi
-        .module()
+        .module('jediModule', [])
         .register('foo', 'bar')
         .factory('baz', function (foo) {
           return `${foo}qux`;
@@ -29,7 +29,7 @@ describe('Injection resolver', function () {
     it('should be able to support ng-annotate style injections', function () {
       // Given
       const jediModule = jedi
-        .module()
+        .module('jediModule', [])
         .register('foo', 'bar')
         .factory('baz', ['foo', function (foo) {
           return `${foo}qux`;
@@ -48,7 +48,7 @@ describe('Injection resolver', function () {
     });
 
     it('should throw an error when the module is not found', function () {
-      const jediModule = jedi.module();
+      const jediModule = jedi.module('jediModule', []);
 
       // When
       function thrower() {

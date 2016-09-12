@@ -1,7 +1,11 @@
 import {getArgsList} from './args-list';
+import {modules} from '../module/module';
 
-function bootstrap(module) {
+function bootstrap(moduleOrName) {
+  const module = typeof moduleOrName === 'object' ? moduleOrName : modules[moduleOrName];
+
   module.dependencies.map(bootstrap);
+
   if (module.runnableMethod) {
 
     let runnableMethod;

@@ -5,10 +5,13 @@ import factory from './factory';
 import service from './service';
 import run from './run';
 
-module.exports = function createModule(dependencies) {
+export const modules = {};
+
+export default function createModule(name, dependencies) {
   const module = {};
 
-  module.dependencies = dependencies || [];
+  module.name = name;
+  module.dependencies = dependencies && dependencies.map(d => typeof d === 'string' ? d : d.name) || [];
 
   module.injectables = {};
   module.factories = {};
@@ -23,6 +26,8 @@ module.exports = function createModule(dependencies) {
 
   module.resolve = resolve.bind(module);
   module.get = get.bind(module);
+
+  modules[name] = module;
 
   return module;
 }

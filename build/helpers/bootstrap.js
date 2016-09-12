@@ -4,8 +4,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _argsList = require('./args-list');
 
-function bootstrap(module) {
+var _module = require('../module/module');
+
+function bootstrap(moduleOrName) {
+  var module = (typeof moduleOrName === 'undefined' ? 'undefined' : _typeof(moduleOrName)) === 'object' ? moduleOrName : _module.modules[moduleOrName];
+
   module.dependencies.map(bootstrap);
+
   if (module.runnableMethod) {
 
     var runnableMethod = undefined;

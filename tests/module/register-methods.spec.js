@@ -5,7 +5,7 @@ import jedi from '../../src';
 describe('Injectable registration', function () {
   let module;
   beforeEach(function () {
-    module = jedi.module();
+    module = jedi.module('module1', []);
   });
 
   const testErrorsForRegistered = (method) => {
