@@ -9,10 +9,15 @@ var _module = require('../module/module');
 function bootstrap(moduleOrName) {
   var module = (typeof moduleOrName === 'undefined' ? 'undefined' : _typeof(moduleOrName)) === 'object' ? moduleOrName : _module.modules[moduleOrName];
 
-  module.dependencies.map(bootstrap);
+  if (!module) {
+    throw new Error('Module not found ' + moduleOrName);
+  }
+
+  module.dependencies.map(function (dependency) {
+    return bootstrap(dependency);
+  });
 
   if (module.runnableMethod) {
-
     var runnableMethod = undefined;
     var args = undefined;
 

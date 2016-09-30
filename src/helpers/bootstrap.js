@@ -4,10 +4,13 @@ import {modules} from '../module/module';
 function bootstrap(moduleOrName) {
   const module = typeof moduleOrName === 'object' ? moduleOrName : modules[moduleOrName];
 
-  module.dependencies.map(bootstrap);
+  if (!module) {
+    throw new Error(`Module not found ${moduleOrName}`);
+  }
+
+  module.dependencies.map(dependency => bootstrap(dependency));
 
   if (module.runnableMethod) {
-
     let runnableMethod;
     let args;
 
