@@ -92,5 +92,15 @@ describe('Module bootstraping', function () {
       // Then
       sinon.assert.callOrder(runnable1, runnable2, finalRunnable);
     });
+
+    it('should throw an error when a module\'s dependency is not found', function () {
+      // Given
+      const module = jedi.module('modulename', [
+        'someinexistant-module'
+      ]);
+
+      // Then
+      expect(jedi.bootstrap.bind(null, module)).to.throw('Module not found someinexistant-module')
+    });
   });
 });
