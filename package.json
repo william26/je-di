@@ -1,6 +1,6 @@
 {
   "name": "je-di",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Just Enough dependency injection",
   "repository": "https://github.com/william26/je-di.git",
   "main": "index.js",
