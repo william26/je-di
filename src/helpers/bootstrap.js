@@ -8,7 +8,12 @@ function bootstrap(moduleOrName) {
     throw new Error(`Module not found ${moduleOrName}`);
   }
 
-  module.dependencies.map(dependency => bootstrap(dependency));
+  module.dependencies.map(dependency =>{
+    bootstrap(dependency);
+    module.injectables = Object.assign(module.injectables, modules[dependency].injectables);
+    module.factories = Object.assign(module.factories, modules[dependency].factories);
+    module.services = Object.assign(module.services, modules[dependency].services);
+  });
 
   if (module.runnableMethod) {
     let runnableMethod;
