@@ -14,7 +14,10 @@ function bootstrap(moduleOrName) {
   }
 
   module.dependencies.map(function (dependency) {
-    return bootstrap(dependency);
+    bootstrap(dependency);
+    module.injectables = Object.assign(module.injectables, _module.modules[dependency].injectables);
+    module.factories = Object.assign(module.factories, _module.modules[dependency].factories);
+    module.services = Object.assign(module.services, _module.modules[dependency].services);
   });
 
   if (module.runnableMethod) {
