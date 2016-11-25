@@ -1,24 +1,31 @@
 import {getArgsList, getMethod} from '../helpers/args-list';
 import {modules} from './module';
 
+const injectables = {};
+
 export default function resolveName(name) {
   try {
-    const fromInjectable = this.injectables[name]
-    if (fromInjectable) {
-      return fromInjectable;
+    const fromGlobalInjectable = injectables[name];
+    if (fromGlobalInjectable) {
+      return fromGlobalInjectable;
+    }
+
+    const fromModuleInjectable = this.injectables[name];
+    if (fromModuleInjectable) {
+      return fromModuleInjectable;
     }
 
     const fromFactory = this.factories[name];
     if (fromFactory) {
       const result = getMethod(fromFactory)(...getArgsList(fromFactory).map(arg => this.get(arg)));
-      this.injectables[name] = result;
+      injectables[name] = result;
       return result;
     }
 
     const fromServices = this.services[name];
     if (fromServices) {
       const result = new (getMethod(fromServices))(...getArgsList(fromServices).map(arg => this.get(arg)));
-      this.injectables[name] = result;
+      injectables[name] = result;
       return result;
     }
 
@@ -30,11 +37,11 @@ export default function resolveName(name) {
           return injectable;
         }
       }, null);
-      this.injectables[name] = result;
+      injectables[name] = result;
       return result;
     }
-    throw new Error(`Impossible to find module '${name}'`);
 
+    throw new Error(`Impossible to find module '${name}'`);
   } catch (err) {
     throw err;
   }

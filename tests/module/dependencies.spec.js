@@ -3,7 +3,6 @@ import {stub} from 'sinon';
 import jedi from '../../src';
 
 describe('Module dependencies', function () {
-
   describe('a module .module() method', function () {
     it('can register an array of dependencies if given', function () {
       // Given
@@ -48,19 +47,6 @@ describe('Module dependencies', function () {
       expect(result).to.deep.equal([{
         bla: 'barquxblu'
       }]);
-    });
-
-    it('should add injectables resolved from a dependency to the module\'s own injectables', function () {
-      const module1 = jedi.module('module1', []);
-
-      module1.get = stub().withArgs('foo').returns('bar');
-
-      const module2 = jedi.module('module2', [module1]);
-
-      module2.resolve(['foo']);
-
-      // Then
-      expect(module2.injectables.foo).to.equal('bar')
     });
   });
 });
