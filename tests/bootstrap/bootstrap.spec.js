@@ -102,5 +102,22 @@ describe('Module bootstraping', function () {
       // Then
       expect(jedi.bootstrap.bind(null, module)).to.throw('Module not found someinexistant-module')
     });
+
+    it('should run a module\'s runnable method only once on bootstrap', function () {
+      // Given
+      const runnable1 = stub();
+      const module1 = jedi.module('module1', []).run(runnable1);
+
+      const module2 = jedi.module('module2', ['module1']);
+      const module3 = jedi.module('module3', ['module1']);
+
+      const module4 = jedi.module('module4', ['module2', 'module3']);
+
+      // When
+      jedi.bootstrap(module4);
+
+      // Then
+      expect(runnable1.callCount).to.equal(1);
+    });
   });
 });

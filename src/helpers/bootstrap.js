@@ -15,7 +15,7 @@ function bootstrap(moduleOrName) {
     module.services = Object.assign(module.services, modules[dependency].services);
   });
 
-  if (module.runnableMethod) {
+  if (module.runnableMethod && !module.runnableMethodRan) {
     let runnableMethod;
     let args;
 
@@ -30,6 +30,7 @@ function bootstrap(moduleOrName) {
     }
 
     runnableMethod.apply(module, module.resolve(args));
+    module.runnableMethodRan = true;
   }
 };
 
