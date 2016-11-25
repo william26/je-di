@@ -11,13 +11,20 @@ var _module = require('./module');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var injectables = {};
+
 function resolveName(name) {
   var _this = this;
 
   try {
-    var fromInjectable = this.injectables[name];
-    if (fromInjectable) {
-      return fromInjectable;
+    var fromGlobalInjectable = injectables[name];
+    if (fromGlobalInjectable) {
+      return fromGlobalInjectable;
+    }
+
+    var fromModuleInjectable = this.injectables[name];
+    if (fromModuleInjectable) {
+      return fromModuleInjectable;
     }
 
     var fromFactory = this.factories[name];
@@ -25,7 +32,7 @@ function resolveName(name) {
       var result = (0, _argsList.getMethod)(fromFactory).apply(undefined, _toConsumableArray((0, _argsList.getArgsList)(fromFactory).map(function (arg) {
         return _this.get(arg);
       })));
-      this.injectables[name] = result;
+      injectables[name] = result;
       return result;
     }
 
@@ -34,7 +41,7 @@ function resolveName(name) {
       var _result = new (Function.prototype.bind.apply((0, _argsList.getMethod)(fromServices), [null].concat(_toConsumableArray((0, _argsList.getArgsList)(fromServices).map(function (arg) {
         return _this.get(arg);
       })))))();
-      this.injectables[name] = _result;
+      injectables[name] = _result;
       return _result;
     }
 
@@ -46,9 +53,10 @@ function resolveName(name) {
           return injectable;
         }
       }, null);
-      this.injectables[name] = _result2;
+      injectables[name] = _result2;
       return _result2;
     }
+
     throw new Error('Impossible to find module \'' + name + '\'');
   } catch (err) {
     throw err;
