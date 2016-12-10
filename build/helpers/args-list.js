@@ -19,6 +19,9 @@ function getArgsList(target) {
   if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) === 'object' && target.length && typeof target[target.length - 1] === 'function') {
     return target.slice(0, target.length - 1);
   }
+  if (typeof target === 'function' && !!target.$inject) {
+    return target.$inject;
+  }
   if (typeof target === 'function') {
     return (0, _functionArguments2.default)(target);
   }
